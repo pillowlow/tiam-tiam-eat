@@ -1,0 +1,16 @@
+{
+  "name": "tiam-tiam eat",
+  "tagline": "一個放置我們的作品、連結，以及即將發生之事的小地方。",
+  "links": [
+    {
+      "id": "instagram",
+      "label": "Instagram",
+      "href": "https://www.instagram.com/tiam_tiam_eat/"
+    },
+    {
+      "id": "demo",
+      "label": "作品展示",
+      "href": "#"
+    }
+  ]
+}

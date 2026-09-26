@@ -1,0 +1,16 @@
+{
+  "name": "tiam-tiam eat",
+  "tagline": "A small place for our work, links, and things to come.",
+  "links": [
+    {
+      "id": "instagram",
+      "label": "Instagram",
+      "href": "https://www.instagram.com/tiam_tiam_eat/"
+    },
+    {
+      "id": "demo",
+      "label": "Demo work",
+      "href": "#"
+    }
+  ]
+}
