@@ -1,6 +1,84 @@
 {
-  "name": "tiam-tiam eat",
-  "tagline": "一個放置我們的作品、連結，以及即將發生之事的小地方。",
+  "group": {
+    "name": "tiam-tiam eat",
+    "handle": "@tiam_tiam_eat",
+    "tagline": "一個放置我們的作品、連結，以及即將發生之事的小地方。",
+    "about": "tiam-tiam eat 是一個藝術團體。這裡收集我們的計畫與連結。",
+    "established": "創立於 2025"
+  },
+  "ui": {
+    "currentProject": "目前計畫",
+    "projects": "計畫",
+    "aboutProject": "關於這個計畫",
+    "aboutGroup": "關於 tiam-tiam eat",
+    "comingSoon": "即將推出",
+    "language": "語言",
+    "venues": "時間與地點",
+    "credits": "製作名單",
+    "links": "連結",
+    "visit": "前往"
+  },
+  "featured": "ripe-for-the-pickin",
+  "projects": [
+    {
+      "id": "ripe-for-the-pickin",
+      "title": "釘點芳 Ripe for the pickin'",
+      "subtitle": "tiām-tiām EAT 計畫",
+      "year": "2026",
+      "date": "2026.10.25（日）",
+      "status": "current",
+      "summary": "同一天在恩荷芬與台北舉行的展覽、茶會與工作坊，兩地現場連線。荷蘭設計週 2026 參展計畫。",
+      "tags": [
+        "荷蘭設計週",
+        "恩荷芬",
+        "台北"
+      ],
+      "venues": [
+        {
+          "city": "恩荷芬",
+          "name": "NOR",
+          "address": "Leidingstraat 17B, 5617 AJ Eindhoven",
+          "hours": [
+            "展覽 09:00–18:00",
+            "茶會與工作坊 13:00、15:00、17:00"
+          ]
+        },
+        {
+          "city": "台北",
+          "name": "PRNDL.art 品度藝術",
+          "address": "臺北市大同區涼州街 48 號",
+          "hours": [
+            "茶會與工作坊 20:00",
+            "與恩荷芬 13:00 場次連線"
+          ]
+        }
+      ],
+      "credits": [
+        {
+          "role": "策展人",
+          "names": "陳曼均"
+        },
+        {
+          "role": "參展藝術家",
+          "names": "陳柏諭、趙若彤、羅聿琪、yindoor"
+        },
+        {
+          "role": "場地協力",
+          "names": "NOR、PRNDL.art（品度藝術）"
+        },
+        {
+          "role": "主視覺設計",
+          "names": "簡晨傑"
+        },
+        {
+          "role": "數位設計",
+          "names": "陳柏諭"
+        }
+      ],
+      "href": null,
+      "image": "keyvisual-1200.webp"
+    }
+  ],
   "links": [
     {
       "id": "instagram",
@@ -10,7 +88,7 @@
     {
       "id": "demo",
       "label": "作品展示",
-      "href": "#"
+      "href": "https://sapereculum.com/home"
     }
   ]
 }
