@@ -84,6 +84,11 @@
       "id": "instagram",
       "label": "Instagram",
       "href": "https://www.instagram.com/tiam_tiam_eat/"
+    },
+    {
+      "id": "demo",
+      "label": "Demo work",
+      "href": "https://sapereculum.com/home"
     }
   ]
 }
