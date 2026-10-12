@@ -41,7 +41,9 @@ function fontSubsetPlugin(): Plugin {
   };
 }
 
-export default defineConfig({
+export default defineConfig(({ isSsrBuild }) => ({
   base: "./",
   plugins: [react(), fontSubsetPlugin()],
-});
+  // The SSR build only produces entry-server.js for scripts/prerender.mjs.
+  build: { copyPublicDir: !isSsrBuild },
+}));

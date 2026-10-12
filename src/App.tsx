@@ -1,44 +1,54 @@
 import { useEffect, useState } from "react";
 import en from "./content/en.json";
+import nl from "./content/nl.json";
 import zhHant from "./content/zh-Hant.json";
 import type { Locale, LocaleContent } from "./content/types";
-import { Footer } from "./components/Footer";
-import { GroupLinks } from "./components/GroupLinks";
-import { Hero } from "./components/Hero";
-import { ProjectAbout } from "./components/ProjectAbout";
-import { Projects } from "./components/Projects";
-import { TopBar } from "./components/TopBar";
+import { InfoCard } from "./components/InfoCard";
+import { LinkTree } from "./components/LinkTree";
+import { asset } from "./assets";
 
 const content: Record<Locale, LocaleContent> = {
   en: en as LocaleContent,
   "zh-Hant": zhHant as LocaleContent,
+  nl: nl as LocaleContent,
 };
 
+const locales = Object.keys(content) as Locale[];
 const localeStorageKey = "tiam-tiam-eat-locale";
 
-function getInitialLocale(): Locale {
+function isLocale(value: unknown): value is Locale {
+  return typeof value === "string" && (locales as string[]).includes(value);
+}
+
+export function getInitialLocale(): Locale {
+  if (typeof window === "undefined") return "en";
+
   try {
     const savedLocale = window.localStorage.getItem(localeStorageKey);
-
-    if (savedLocale === "en" || savedLocale === "zh-Hant") {
-      return savedLocale;
-    }
+    if (isLocale(savedLocale)) return savedLocale;
   } catch {
     // Local storage may be unavailable; browser language is a safe fallback.
   }
 
-  return navigator.language.toLowerCase().startsWith("zh") ? "zh-Hant" : "en";
+  const language = navigator.language.toLowerCase();
+  if (language.startsWith("zh")) return "zh-Hant";
+  if (language.startsWith("nl")) return "nl";
+  return "en";
 }
 
-function App() {
-  const [locale, setLocale] = useState<Locale>(getInitialLocale);
+type Props = {
+  initialLocale: Locale;
+};
+
+function App({ initialLocale }: Props) {
+  const [locale, setLocale] = useState<Locale>(initialLocale);
   const currentContent = content[locale];
   const featured =
     currentContent.projects.find((project) => project.id === currentContent.featured) ??
     currentContent.projects[0];
 
   useEffect(() => {
-    document.documentElement.lang = locale === "zh-Hant" ? "zh-Hant" : "en";
+    document.documentElement.lang = locale;
 
     try {
       window.localStorage.setItem(localeStorageKey, locale);
@@ -49,14 +59,25 @@ function App() {
 
   return (
     <div className="site">
-      <TopBar content={currentContent} locale={locale} onLocaleChange={setLocale} />
-      <main>
-        <Hero project={featured} ui={currentContent.ui} />
-        <ProjectAbout project={featured} ui={currentContent.ui} />
-        <Projects projects={currentContent.projects} ui={currentContent.ui} />
-        <GroupLinks group={currentContent.group} links={currentContent.links} ui={currentContent.ui} />
+      <div className="decor" aria-hidden="true">
+        <img
+          alt=""
+          decoding="sync"
+          fetchPriority="high"
+          height={3440}
+          sizes="(min-width: 768px) 860px, 300px"
+          src={asset("keyvisual-800.webp")}
+          srcSet={`${asset("keyvisual-800.webp")} 800w, ${asset("keyvisual-1200.webp")} 1200w, ${asset("keyvisual-2400.webp")} 2400w`}
+          width={2580}
+        />
+      </div>
+      <main className="stack">
+        <LinkTree content={currentContent} locale={locale} onLocaleChange={setLocale} />
+        <InfoCard project={featured} ui={currentContent.ui} />
       </main>
-      <Footer group={currentContent.group} />
+      <footer className="site-footer">
+        © {new Date().getFullYear()} {currentContent.group.name}
+      </footer>
     </div>
   );
 }

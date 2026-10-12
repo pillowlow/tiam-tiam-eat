@@ -1,4 +1,4 @@
-export type Locale = "en" | "zh-Hant";
+export type Locale = "en" | "zh-Hant" | "nl";
 
 export type LinkItem = {
   id: string;
@@ -24,7 +24,7 @@ export type Project = {
   subtitle: string;
   year: string;
   date: string;
-  status: "current" | "past";
+  status: "current" | "demo" | "past";
   summary: string;
   tags: string[];
   image?: string;
@@ -42,12 +42,16 @@ export type LocaleContent = {
     established: string;
   };
   ui: {
+    group: string;
     currentProject: string;
     projects: string;
     aboutProject: string;
     aboutGroup: string;
     comingSoon: string;
     visit: string;
+    demo: string;
+    openArtwork: string;
+    details: string;
     language: string;
     venues: string;
     credits: string;
