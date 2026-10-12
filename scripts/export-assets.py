@@ -104,9 +104,9 @@ def keyvisual() -> Image.Image:
     bbox = rgba.getbbox()
     rgba = rgba.crop(bbox)
     print(f"keyvisual cropped to {rgba.size}; transparent px: {(alpha == 0).mean():.1%}")
-    for width in (1200, 2400):
+    for width, quality in ((800, 78), (1200, 78), (2400, 72)):
         r = rgba.resize((width, round(rgba.height * width / rgba.width)), Image.LANCZOS)
-        save_webp(r, f"keyvisual-{width}.webp", quality=78 if width == 1200 else 72)
+        save_webp(r, f"keyvisual-{width}.webp", quality=quality)
     return rgba
 
 

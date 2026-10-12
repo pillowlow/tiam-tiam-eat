@@ -16,7 +16,11 @@
     "venues": "Where and when",
     "credits": "Credits",
     "links": "Links",
-    "visit": "Visit"
+    "visit": "Visit",
+    "demo": "Demo project",
+    "openArtwork": "Open the artwork",
+    "details": "Details below",
+    "group": "Artist group"
   },
   "featured": "ripe-for-the-pickin",
   "projects": [
@@ -77,6 +81,19 @@
       ],
       "href": null,
       "image": "keyvisual-1200.webp"
+    },
+    {
+      "id": "sapereculum",
+      "title": "Sapereculum",
+      "subtitle": "Demo project · online artwork",
+      "year": "2026",
+      "date": "",
+      "status": "demo",
+      "summary": "A collaborative flavour workspace that lives online. Open it in the browser.",
+      "tags": [],
+      "venues": [],
+      "credits": [],
+      "href": "https://sapereculum.com/home"
     }
   ],
   "links": [
@@ -84,11 +101,6 @@
       "id": "instagram",
       "label": "Instagram",
       "href": "https://www.instagram.com/tiam_tiam_eat/"
-    },
-    {
-      "id": "demo",
-      "label": "Demo work",
-      "href": "https://sapereculum.com/home"
     }
   ]
 }

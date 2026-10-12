@@ -16,7 +16,11 @@
     "venues": "時間與地點",
     "credits": "製作名單",
     "links": "連結",
-    "visit": "前往"
+    "visit": "前往",
+    "demo": "示範計畫",
+    "openArtwork": "開啟作品",
+    "details": "詳情見下方",
+    "group": "藝術團體"
   },
   "featured": "ripe-for-the-pickin",
   "projects": [
@@ -77,6 +81,19 @@
       ],
       "href": null,
       "image": "keyvisual-1200.webp"
+    },
+    {
+      "id": "sapereculum",
+      "title": "Sapereculum",
+      "subtitle": "示範計畫 · 線上作品",
+      "year": "2026",
+      "date": "",
+      "status": "demo",
+      "summary": "一個線上協作的風味工作區，可直接在瀏覽器中開啟。",
+      "tags": [],
+      "venues": [],
+      "credits": [],
+      "href": "https://sapereculum.com/home"
     }
   ],
   "links": [
@@ -84,11 +101,6 @@
       "id": "instagram",
       "label": "Instagram",
       "href": "https://www.instagram.com/tiam_tiam_eat/"
-    },
-    {
-      "id": "demo",
-      "label": "作品展示",
-      "href": "https://sapereculum.com/home"
     }
   ]
 }

@@ -1,0 +1,106 @@
+{
+  "group": {
+    "name": "tiam-tiam eat",
+    "handle": "@tiam_tiam_eat",
+    "tagline": "Een kleine plek voor ons werk, links en wat komen gaat.",
+    "about": "tiam-tiam eat is een kunstenaarscollectief. Hier verzamelen we onze projecten en links.",
+    "established": "Opgericht in 2025"
+  },
+  "ui": {
+    "currentProject": "Huidig project",
+    "projects": "Projecten",
+    "aboutProject": "Over het project",
+    "aboutGroup": "Over tiam-tiam eat",
+    "comingSoon": "Binnenkort",
+    "language": "Taal",
+    "venues": "Waar en wanneer",
+    "credits": "Credits",
+    "links": "Links",
+    "visit": "Bekijk",
+    "demo": "Demoproject",
+    "openArtwork": "Open het werk",
+    "details": "Details hieronder",
+    "group": "Collectief"
+  },
+  "featured": "ripe-for-the-pickin",
+  "projects": [
+    {
+      "id": "ripe-for-the-pickin",
+      "title": "釘點芳 Ripe for the pickin'",
+      "subtitle": "Ting-tiám-phang · een tiām-tiām EAT-project",
+      "year": "2026",
+      "date": "Zondag 25 oktober 2026",
+      "status": "current",
+      "summary": "Een tentoonstelling, theeceremonie en workshop op dezelfde dag in Eindhoven en Taipei, live met elkaar verbonden. Onderdeel van Dutch Design Week 2026.",
+      "tags": [
+        "Dutch Design Week",
+        "Eindhoven",
+        "Taipei"
+      ],
+      "venues": [
+        {
+          "city": "Eindhoven",
+          "name": "NOR",
+          "address": "Leidingstraat 17B, 5617 AJ Eindhoven",
+          "hours": [
+            "Tentoonstelling 09:00–18:00",
+            "Theeceremonie & workshop 13:00, 15:00, 17:00"
+          ]
+        },
+        {
+          "city": "Taipei",
+          "name": "PRNDL.art 品度藝術",
+          "address": "No. 48, Liangzhou St., Datong Dist., Taipei City",
+          "hours": [
+            "Theeceremonie & workshop 20:00",
+            "Live verbonden met de sessie van 13:00 in Eindhoven"
+          ]
+        }
+      ],
+      "credits": [
+        {
+          "role": "Curator",
+          "names": "Man-Chun Chen"
+        },
+        {
+          "role": "Kunstenaars",
+          "names": "Po-Yu Chen, Ruo-Tong Zhao, Yu-Chi Lo, yindoor"
+        },
+        {
+          "role": "Locatiepartners",
+          "names": "NOR, PRNDL.art"
+        },
+        {
+          "role": "Key visual",
+          "names": "Chen-Chieh Chien"
+        },
+        {
+          "role": "Digitaal ontwerp",
+          "names": "Po-Yu Chen"
+        }
+      ],
+      "href": null,
+      "image": "keyvisual-1200.webp"
+    },
+    {
+      "id": "sapereculum",
+      "title": "Sapereculum",
+      "subtitle": "Demoproject · online kunstwerk",
+      "year": "2026",
+      "date": "",
+      "status": "demo",
+      "summary": "Een gezamenlijke smaakwerkruimte die online leeft. Open het in de browser.",
+      "tags": [],
+      "venues": [],
+      "credits": [],
+      "href": "https://sapereculum.com/home"
+    }
+  ],
+  "links": [
+    {
+      "id": "instagram",
+      "label": "Instagram",
+      "href": "https://www.instagram.com/tiam_tiam_eat/"
+    }
+  ]
+}

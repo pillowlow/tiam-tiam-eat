@@ -5,3 +5,4 @@ dist
 
 # Design masters (7-9 MB each); only web exports in public/assets are tracked
 design/
+dist-ssr
