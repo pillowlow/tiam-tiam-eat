@@ -3,11 +3,50 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+    <meta name="theme-color" content="#D47449" />
     <meta
       name="description"
-      content="tiam-tiam eat — links and works from an artist group."
+      content="tiam-tiam eat — an artist group. Current project: 釘點芳 Ripe for the pickin', 25 October 2026 in Eindhoven and Taipei."
     />
     <title>tiam-tiam eat</title>
+
+    <link rel="icon" type="image/png" sizes="64x64" href="/assets/favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="tiam-tiam eat" />
+    <meta property="og:title" content="tiam-tiam eat — 釘點芳 Ripe for the pickin'" />
+    <meta
+      property="og:description"
+      content="An exhibition, tea party and workshop on 25 October 2026 in Eindhoven and Taipei. A tiam-tiam eat project."
+    />
+    <meta property="og:url" content="https://tiam-tiam-eat.com/" />
+    <meta property="og:image" content="https://tiam-tiam-eat.com/assets/og.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="tiam-tiam eat — 釘點芳 Ripe for the pickin'" />
+    <meta name="twitter:image" content="https://tiam-tiam-eat.com/assets/og.jpg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Font hrefs are filled by the font-subset plugin in vite.config.ts and load without blocking render. -->
+    <link rel="preload" as="style" href="%FONTS_LATIN_HREF%" />
+    <link rel="preload" as="style" href="%FONTS_CJK_HREF%" />
+    <link rel="stylesheet" href="%FONTS_LATIN_HREF%" media="print" onload="this.media='all'" />
+    <link rel="stylesheet" href="%FONTS_CJK_HREF%" media="print" onload="this.media='all'" />
+    <noscript>
+      <link rel="stylesheet" href="%FONTS_LATIN_HREF%" />
+      <link rel="stylesheet" href="%FONTS_CJK_HREF%" />
+    </noscript>
+    <link
+      rel="preload"
+      as="image"
+      href="/assets/wordmark-800.webp"
+      imagesrcset="/assets/wordmark-800.webp 800w, /assets/wordmark-1200.webp 1200w"
+      imagesizes="(min-width: 768px) 520px, calc(100vw - 32px)"
+    />
   </head>
   <body>
     <div id="root"></div>

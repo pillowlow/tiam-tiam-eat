@@ -1,16 +1,89 @@
 {
-  "name": "tiam-tiam eat",
-  "tagline": "A small place for our work, links, and things to come.",
+  "group": {
+    "name": "tiam-tiam eat",
+    "handle": "@tiam_tiam_eat",
+    "tagline": "A small place for our work, links, and things to come.",
+    "about": "tiam-tiam eat is an artist group. This page gathers our projects and links.",
+    "established": "Est. 2025"
+  },
+  "ui": {
+    "currentProject": "Current project",
+    "projects": "Projects",
+    "aboutProject": "About the project",
+    "aboutGroup": "About tiam-tiam eat",
+    "comingSoon": "Coming soon",
+    "language": "Language",
+    "venues": "Where and when",
+    "credits": "Credits",
+    "links": "Links",
+    "visit": "Visit"
+  },
+  "featured": "ripe-for-the-pickin",
+  "projects": [
+    {
+      "id": "ripe-for-the-pickin",
+      "title": "釘點芳 Ripe for the pickin'",
+      "subtitle": "Ting-tiám-phang · a tiām-tiām EAT project",
+      "year": "2026",
+      "date": "Sunday, 25 October 2026",
+      "status": "current",
+      "summary": "An exhibition, tea party and workshop held on the same day in Eindhoven and Taipei, with the two cities linked live. Part of Dutch Design Week 2026.",
+      "tags": [
+        "Dutch Design Week",
+        "Eindhoven",
+        "Taipei"
+      ],
+      "venues": [
+        {
+          "city": "Eindhoven",
+          "name": "NOR",
+          "address": "Leidingstraat 17B, 5617 AJ Eindhoven",
+          "hours": [
+            "Exhibition 09:00–18:00",
+            "Tea party & workshop 13:00, 15:00, 17:00"
+          ]
+        },
+        {
+          "city": "Taipei",
+          "name": "PRNDL.art 品度藝術",
+          "address": "No. 48, Liangzhou St., Datong Dist., Taipei City",
+          "hours": [
+            "Tea party & workshop 20:00",
+            "Live-linked with the 13:00 session in Eindhoven"
+          ]
+        }
+      ],
+      "credits": [
+        {
+          "role": "Curator",
+          "names": "Man-Chun Chen"
+        },
+        {
+          "role": "Artists",
+          "names": "Po-Yu Chen, Ruo-Tong Zhao, Yu-Chi Lo, yindoor"
+        },
+        {
+          "role": "Venue partners",
+          "names": "NOR, PRNDL.art"
+        },
+        {
+          "role": "Key visual",
+          "names": "Chen-Chieh Chien"
+        },
+        {
+          "role": "Digital design",
+          "names": "Po-Yu Chen"
+        }
+      ],
+      "href": null,
+      "image": "keyvisual-1200.webp"
+    }
+  ],
   "links": [
     {
       "id": "instagram",
       "label": "Instagram",
       "href": "https://www.instagram.com/tiam_tiam_eat/"
-    },
-    {
-      "id": "demo",
-      "label": "Demo work",
-      "href": "#"
     }
   ]
 }
