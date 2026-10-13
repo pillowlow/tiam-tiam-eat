@@ -13,15 +13,18 @@ export function InfoCard({ project, ui }: Props) {
         {ui.currentProject} · {project.year}
       </p>
       <h2 className="info-wordmark" id="project-title">
-        <img
-          alt={project.title}
-          decoding="async"
-          height={1182}
-          sizes="(min-width: 560px) 300px, 60vw"
-          src={asset("wordmark-800.webp")}
-          srcSet={`${asset("wordmark-800.webp")} 800w, ${asset("wordmark-1200.webp")} 1200w`}
-          width={1200}
-        />
+        {project.image ? (
+          <img
+            alt={project.title}
+            decoding="async"
+            height={1500}
+            sizes="(min-width: 560px) 300px, 60vw"
+            src={asset(project.image)}
+            width={1200}
+          />
+        ) : (
+          project.title
+        )}
       </h2>
       <p className="info-subtitle">{project.subtitle}</p>
       <p className="info-summary">{project.summary}</p>

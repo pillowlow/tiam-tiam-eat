@@ -240,13 +240,13 @@ img {
   transform: translateX(4px);
 }
 
-/* The exhibition work gets a sage tint so it reads apart from the other rows. */
+/* The exhibition work gets a deeper apricot tint so it reads apart from the other rows. */
 .tree-row--demo {
-  background: rgba(194, 184, 143, 0.5);
+  background: rgba(225, 141, 90, 0.3);
 }
 
 .tree-row--demo:hover {
-  background: rgba(194, 184, 143, 0.8);
+  background: rgba(225, 141, 90, 0.42);
 }
 
 .tree-index {

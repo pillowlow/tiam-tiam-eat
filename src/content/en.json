@@ -24,6 +24,19 @@
   "featured": "ripe-for-the-pickin",
   "projects": [
     {
+      "id": "sapereculum",
+      "title": "Interactive work Sapereculum",
+      "subtitle": "Demo project · online artwork",
+      "year": "2026",
+      "date": "",
+      "status": "demo",
+      "summary": "A collaborative flavour workspace that lives online. Open it in the browser.",
+      "tags": [],
+      "venues": [],
+      "credits": [],
+      "href": "https://sapereculum.com/home"
+    },
+    {
       "id": "ripe-for-the-pickin",
       "title": "釘點芳 Ripe for the pickin'",
       "subtitle": "Ting-tiám-phang · a tiām-tiām EAT project",
@@ -80,19 +93,6 @@
       ],
       "href": null,
       "image": "keyvisual-1200.webp"
-    },
-    {
-      "id": "sapereculum",
-      "title": "Sapereculum",
-      "subtitle": "Demo project · online artwork",
-      "year": "2026",
-      "date": "",
-      "status": "demo",
-      "summary": "A collaborative flavour workspace that lives online. Open it in the browser.",
-      "tags": [],
-      "venues": [],
-      "credits": [],
-      "href": "https://sapereculum.com/home"
     }
   ],
   "links": [
