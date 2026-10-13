@@ -64,11 +64,11 @@ function App({ initialLocale }: Props) {
           alt=""
           decoding="sync"
           fetchPriority="high"
-          height={3440}
-          sizes="(min-width: 768px) 860px, 300px"
+          height={3000}
+          sizes="(min-width: 768px) 860px, 100vw"
           src={asset("keyvisual-800.webp")}
           srcSet={`${asset("keyvisual-800.webp")} 800w, ${asset("keyvisual-1200.webp")} 1200w, ${asset("keyvisual-2400.webp")} 2400w`}
-          width={2580}
+          width={2400}
         />
       </div>
       <main className="stack">

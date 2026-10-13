@@ -39,7 +39,6 @@ export type LocaleContent = {
     handle: string;
     tagline: string;
     about: string;
-    established: string;
   };
   ui: {
     group: string;
