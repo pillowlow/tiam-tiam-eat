@@ -1,7 +1,7 @@
 """Export web assets from the design masters in design/ into public/assets/.
 
 Run from the repo root:  python -I scripts/export-assets.py
-Masters (not tracked in git): design/title.png, design/new_withall.jpg, design/gradiant.jpg
+Masters (not tracked in git): design/title.png, design/new_theme.jpg, design/new_withall.jpg, design/gradiant.jpg
 The site icon is public/assets/tiamtiameat_logo.png, scaled to each icon size.
 """
 from __future__ import annotations
@@ -66,9 +66,10 @@ def favicon() -> None:
         report(p)
 
 
-# --------------------------------------------------------------- key visual
-def keyvisual() -> Image.Image:
-    im = Image.open(SRC / "new_withall.jpg").convert("RGB")
+# ------------------------------------------------------- paper-cut artwork
+def cut_paper(name: str) -> Image.Image:
+    """Return a master with its flat paper-coloured background made transparent."""
+    im = Image.open(SRC / name).convert("RGB")
     a = np.asarray(im).astype(np.int16)
     # The paper behind the fruit is a flat tone (cream, not always pure white): sample it from the corner.
     paper = np.median(a[:40, :40].reshape(-1, 3), axis=0)
@@ -96,14 +97,27 @@ def keyvisual() -> Image.Image:
 
     rgba = im.copy()
     rgba.putalpha(alpha_img)
-    # Un-premultiply halo: pull edge colours away from white toward the disc tone.
     bbox = rgba.getbbox()
     rgba = rgba.crop(bbox)
-    print(f"keyvisual cropped to {rgba.size}; transparent px: {(alpha == 0).mean():.1%}")
+    print(f"{name} cut to {rgba.size}; transparent px: {(alpha == 0).mean():.1%}")
+    return rgba
+
+
+def keyvisual() -> Image.Image:
+    # Background fruit: new_theme with its white corner cut out, shown over the page gradient.
+    rgba = cut_paper("new_theme.jpg")
     for width, quality in ((800, 78), (1200, 78), (2400, 72)):
         r = rgba.resize((width, round(rgba.height * width / rgba.width)), Image.LANCZOS)
         save_webp(r, f"keyvisual-{width}.webp", quality=quality)
     return rgba
+
+
+def poster() -> None:
+    # Event card: the full exhibition poster (new_withall), with the same paper cut-out.
+    rgba = cut_paper("new_withall.jpg")
+    for width, quality in ((800, 78), (1200, 78)):
+        r = rgba.resize((width, round(rgba.height * width / rgba.width)), Image.LANCZOS)
+        save_webp(r, f"poster-{width}.webp", quality=quality)
 
 
 # ----------------------------------------------------------------- gradient
@@ -140,12 +154,13 @@ def og(mark: Image.Image, kv: Image.Image, grad: Image.Image) -> None:
 
 
 if __name__ == "__main__":
-    for f in ("title.png", "new_withall.jpg", "gradiant.jpg"):
+    for f in ("title.png", "new_theme.jpg", "new_withall.jpg", "gradiant.jpg"):
         if not (SRC / f).exists():
             sys.exit(f"missing master: design/{f}")
     mark = wordmark()
     favicon()
     kv = keyvisual()
+    poster()
     grad = gradient()
     og(mark, kv, grad)
     print("done")

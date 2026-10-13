@@ -28,6 +28,7 @@ export type Project = {
   summary: string;
   tags: string[];
   image?: string;
+  icon?: string;
   venues: Venue[];
   credits: Credit[];
   href: string | null;

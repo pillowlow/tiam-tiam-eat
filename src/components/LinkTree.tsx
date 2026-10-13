@@ -1,5 +1,6 @@
 import type { Locale, LocaleContent, Project } from "../content/types";
 import { LanguageSwitch } from "./LanguageSwitch";
+import { asset } from "../assets";
 
 type Props = {
   content: LocaleContent;
@@ -13,7 +14,7 @@ type Row = {
   sub?: string;
   href: string;
   external: boolean;
-  demo?: boolean;
+  icon?: string;
 };
 
 function projectRow(project: Project, ui: LocaleContent["ui"]): Row {
@@ -21,10 +22,9 @@ function projectRow(project: Project, ui: LocaleContent["ui"]): Row {
     return {
       id: project.id,
       label: project.title,
-      sub: project.status === "demo" ? `${ui.demo} · ${ui.openArtwork}` : project.subtitle,
       href: project.href,
       external: project.href.startsWith("http"),
-      demo: project.status === "demo",
+      icon: project.icon,
     };
   }
 
@@ -65,7 +65,7 @@ export function LinkTree({ content, locale, onLocaleChange }: Props) {
       <nav className="tree" aria-label={ui.links}>
         {rows.map((row, index) => (
           <a
-            className={row.demo ? "tree-row tree-row--demo" : "tree-row"}
+            className="tree-row"
             href={row.href}
             key={row.id}
             rel={row.external ? "noreferrer" : undefined}
@@ -73,7 +73,10 @@ export function LinkTree({ content, locale, onLocaleChange }: Props) {
           >
             <span className="tree-index">{String(index + 1).padStart(2, "0")}</span>
             <span className="tree-text">
-              <span className="tree-label">{row.label}</span>
+              <span className="tree-label">
+                {row.label}
+                {row.icon ? <img alt="" className="tree-icon" src={asset(row.icon)} /> : null}
+              </span>
               {row.sub ? <span className="tree-sub">{row.sub}</span> : null}
             </span>
             <span className="tree-arrow" aria-hidden="true">

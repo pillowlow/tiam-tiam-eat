@@ -34,7 +34,8 @@
       "tags": [],
       "venues": [],
       "credits": [],
-      "href": "https://sapereculum.com/home"
+      "href": "https://sapereculum.com/home",
+      "icon": "Sapreculumicon.webp"
     },
     {
       "id": "ripe-for-the-pickin",
@@ -92,7 +93,7 @@
         }
       ],
       "href": null,
-      "image": "keyvisual-1200.webp"
+      "image": "poster-1200.webp"
     }
   ],
   "links": [
