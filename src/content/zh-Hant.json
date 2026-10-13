@@ -24,6 +24,19 @@
   "featured": "ripe-for-the-pickin",
   "projects": [
     {
+      "id": "sapereculum",
+      "title": "互動作品 Sapereculum",
+      "subtitle": "示範計畫 · 線上作品",
+      "year": "2026",
+      "date": "",
+      "status": "demo",
+      "summary": "一個線上協作的風味工作區，可直接在瀏覽器中開啟。",
+      "tags": [],
+      "venues": [],
+      "credits": [],
+      "href": "https://sapereculum.com/home"
+    },
+    {
       "id": "ripe-for-the-pickin",
       "title": "釘點芳 Ripe for the pickin'",
       "subtitle": "tiām-tiām EAT 計畫",
@@ -80,19 +93,6 @@
       ],
       "href": null,
       "image": "keyvisual-1200.webp"
-    },
-    {
-      "id": "sapereculum",
-      "title": "Sapereculum",
-      "subtitle": "示範計畫 · 線上作品",
-      "year": "2026",
-      "date": "",
-      "status": "demo",
-      "summary": "一個線上協作的風味工作區，可直接在瀏覽器中開啟。",
-      "tags": [],
-      "venues": [],
-      "credits": [],
-      "href": "https://sapereculum.com/home"
     }
   ],
   "links": [
