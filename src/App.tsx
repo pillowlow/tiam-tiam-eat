@@ -57,6 +57,27 @@ function App({ initialLocale }: Props) {
     }
   }, [locale]);
 
+  // The fruit drifts up a little slower than the page as you scroll (see .decor in style.css).
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      document.documentElement.style.setProperty("--scroll", `${window.scrollY}px`);
+    };
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(frame);
+    };
+  }, []);
+
   return (
     <div className="site">
       <div className="decor" aria-hidden="true">

@@ -105,6 +105,8 @@ img {
   height: 300px;
   overflow: hidden;
   pointer-events: none;
+  /* Scroll parallax: the page moves 1x, the fruit 0.8x in the same direction, so it drifts up a little slower. */
+  transform: translate3d(0, calc(var(--scroll, 0px) * 0.8), 0);
   -webkit-mask-image: linear-gradient(to bottom, #000 70%, transparent);
   mask-image: linear-gradient(to bottom, #000 70%, transparent);
 }
@@ -395,6 +397,8 @@ img {
     width: min(62vw, 860px);
     height: auto;
     overflow: visible;
+    /* Fixed on desktop, so it moves up 0.2x of the scroll distance instead. */
+    transform: translate3d(0, calc(var(--scroll, 0px) * -0.2), 0);
     -webkit-mask-image: radial-gradient(ellipse at 60% 50%, #000 45%, transparent 78%);
     mask-image: radial-gradient(ellipse at 60% 50%, #000 45%, transparent 78%);
   }
