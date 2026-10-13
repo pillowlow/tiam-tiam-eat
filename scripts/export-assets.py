@@ -1,7 +1,8 @@
 """Export web assets from the design masters in design/ into public/assets/.
 
 Run from the repo root:  python -I scripts/export-assets.py
-Masters (not tracked in git): design/title.png, design/new_theme.jpg, design/gradiant.jpg
+Masters (not tracked in git): design/title.png, design/new_withall.jpg, design/gradiant.jpg
+The site icon is public/assets/tiamtiameat_logo.png, scaled to each icon size.
 """
 from __future__ import annotations
 
@@ -18,7 +19,6 @@ OUT = ROOT / "public" / "assets"
 OUT.mkdir(parents=True, exist_ok=True)
 
 INK = (0x2B, 0x25, 0x22)
-CREAM = (0xDB, 0xD7, 0xC5)
 
 
 def report(path: Path) -> None:
@@ -57,16 +57,10 @@ def wordmark() -> Image.Image:
 
 
 # ------------------------------------------------------------------ favicon
-def favicon(mark: Image.Image) -> None:
-    # 釘 is the first glyph: left ~37 % of the width, top ~34 % of the height.
-    w, h = mark.size
-    glyph = mark.crop((0, 0, int(w * 0.37), int(h * 0.34)))
-    glyph = glyph.crop(glyph.getbbox())
-    side = int(max(glyph.size) * 1.3)
+def favicon() -> None:
+    logo = Image.open(OUT / "tiamtiameat_logo.png").convert("RGB")
     for name, px in (("favicon.png", 64), ("apple-touch-icon.png", 180)):
-        bg = Image.new("RGBA", (side, side), CREAM + (255,))
-        bg.paste(glyph, ((side - glyph.width) // 2, (side - glyph.height) // 2), glyph)
-        small = bg.resize((px, px), Image.LANCZOS)
+        small = logo.resize((px, px), Image.LANCZOS)
         p = OUT / name
         small.save(p, "PNG", optimize=True)
         report(p)
@@ -74,27 +68,29 @@ def favicon(mark: Image.Image) -> None:
 
 # --------------------------------------------------------------- key visual
 def keyvisual() -> Image.Image:
-    im = Image.open(SRC / "new_theme.jpg").convert("RGB")
+    im = Image.open(SRC / "new_withall.jpg").convert("RGB")
     a = np.asarray(im).astype(np.int16)
-    minc = a.min(axis=2)  # whiteness: high min channel = near white
-    near_white = minc > 238
+    # The paper behind the fruit is a flat tone (cream, not always pure white): sample it from the corner.
+    paper = np.median(a[:40, :40].reshape(-1, 3), axis=0)
+    dist = np.abs(a - paper).max(axis=2)  # per-channel distance from the paper tone
+    near_paper = dist < 12
 
-    # Connected component of near-white pixels touching the top-left corner.
+    # Connected component of paper-coloured pixels touching the top-left corner.
     try:
         from scipy import ndimage
 
-        labels, _ = ndimage.label(near_white)
-        region = labels == labels[0, 0] if labels[0, 0] else np.zeros_like(near_white)
+        labels, _ = ndimage.label(near_paper)
+        region = labels == labels[0, 0] if labels[0, 0] else np.zeros_like(near_paper)
         band = ndimage.binary_dilation(region, iterations=24) & ~region
     except ImportError:
-        print("scipy missing; falling back to global whiteness mask (check highlights!)")
-        region = near_white
-        band = np.zeros_like(near_white)
+        print("scipy missing; falling back to a global paper-tone mask (check highlights!)")
+        region = near_paper
+        band = np.zeros_like(near_paper)
 
-    alpha = np.full(minc.shape, 255, dtype=np.float32)
+    alpha = np.full(dist.shape, 255, dtype=np.float32)
     alpha[region] = 0
-    # Soft edge: inside the band, fade by whiteness between min-channel 200 (opaque) and 245 (clear).
-    soft = np.clip((245 - minc[band]) / 45.0, 0, 1) * 255
+    # Soft edge: inside the band, fade from opaque (far from the paper tone) to clear (close to it).
+    soft = np.clip((dist[band] - 12) / 36.0, 0, 1) * 255
     alpha[band] = soft
     alpha_img = Image.fromarray(alpha.astype(np.uint8), "L").filter(ImageFilter.GaussianBlur(1.5))
 
@@ -144,11 +140,11 @@ def og(mark: Image.Image, kv: Image.Image, grad: Image.Image) -> None:
 
 
 if __name__ == "__main__":
-    for f in ("title.png", "new_theme.jpg", "gradiant.jpg"):
+    for f in ("title.png", "new_withall.jpg", "gradiant.jpg"):
         if not (SRC / f).exists():
             sys.exit(f"missing master: design/{f}")
     mark = wordmark()
-    favicon(mark)
+    favicon()
     kv = keyvisual()
     grad = gradient()
     og(mark, kv, grad)

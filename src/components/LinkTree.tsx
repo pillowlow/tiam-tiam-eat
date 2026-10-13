@@ -13,6 +13,7 @@ type Row = {
   sub?: string;
   href: string;
   external: boolean;
+  demo?: boolean;
 };
 
 function projectRow(project: Project, ui: LocaleContent["ui"]): Row {
@@ -23,6 +24,7 @@ function projectRow(project: Project, ui: LocaleContent["ui"]): Row {
       sub: project.status === "demo" ? `${ui.demo} · ${ui.openArtwork}` : project.subtitle,
       href: project.href,
       external: project.href.startsWith("http"),
+      demo: project.status === "demo",
     };
   }
 
@@ -63,7 +65,7 @@ export function LinkTree({ content, locale, onLocaleChange }: Props) {
       <nav className="tree" aria-label={ui.links}>
         {rows.map((row, index) => (
           <a
-            className="tree-row"
+            className={row.demo ? "tree-row tree-row--demo" : "tree-row"}
             href={row.href}
             key={row.id}
             rel={row.external ? "noreferrer" : undefined}
@@ -83,8 +85,6 @@ export function LinkTree({ content, locale, onLocaleChange }: Props) {
 
       <footer className="card-footer">
         <span>{group.handle}</span>
-        <span className="footer-line" aria-hidden="true" />
-        <span>{group.established}</span>
       </footer>
     </section>
   );

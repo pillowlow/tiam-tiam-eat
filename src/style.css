@@ -94,21 +94,27 @@ img {
   overflow: hidden;
 }
 
+/* Phones: the poster fills the upper part of the page, cropped to its top and faded out
+   before the cards. The cards start below the band (see .stack). */
 .decor {
-  position: fixed;
+  position: absolute;
   z-index: 0;
-  right: -28vw;
-  bottom: -22vh;
-  width: min(110vw, 900px);
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 300px;
+  overflow: hidden;
   pointer-events: none;
-  -webkit-mask-image: radial-gradient(ellipse at 60% 50%, #000 45%, transparent 78%);
-  mask-image: radial-gradient(ellipse at 60% 50%, #000 45%, transparent 78%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 70%, transparent);
+  mask-image: linear-gradient(to bottom, #000 70%, transparent);
 }
 
 .decor img {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 0;
 }
 
 /* --------------------------------------------------------------- stack */
@@ -119,7 +125,7 @@ img {
   gap: 20px;
   width: min(100%, 560px);
   margin: 0 auto;
-  padding: 28px var(--gutter) 24px;
+  padding: 236px var(--gutter) 24px;
 }
 
 .card {
@@ -153,12 +159,6 @@ img {
   font-size: 0.85rem;
   letter-spacing: 0.04em;
   color: var(--ink-soft);
-}
-
-.footer-line {
-  flex: 0 0 28px;
-  height: 1px;
-  background: var(--sage);
 }
 
 /* Language switch */
@@ -238,6 +238,15 @@ img {
   background: rgba(255, 252, 244, 0.72);
   border-color: var(--persimmon);
   transform: translateX(4px);
+}
+
+/* The exhibition work gets a sage tint so it reads apart from the other rows. */
+.tree-row--demo {
+  background: rgba(194, 184, 143, 0.5);
+}
+
+.tree-row--demo:hover {
+  background: rgba(194, 184, 143, 0.8);
 }
 
 .tree-index {
@@ -378,9 +387,20 @@ img {
   }
 
   .decor {
+    position: fixed;
+    top: auto;
+    left: auto;
     right: -8vw;
     bottom: -14vh;
     width: min(62vw, 860px);
+    height: auto;
+    overflow: visible;
+    -webkit-mask-image: radial-gradient(ellipse at 60% 50%, #000 45%, transparent 78%);
+    mask-image: radial-gradient(ellipse at 60% 50%, #000 45%, transparent 78%);
+  }
+
+  .decor img {
+    height: auto;
   }
 }
 
