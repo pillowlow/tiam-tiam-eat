@@ -5,6 +5,7 @@ import zhHant from "./content/zh-Hant.json";
 import type { Locale, LocaleContent } from "./content/types";
 import { InfoCard } from "./components/InfoCard";
 import { LinkTree } from "./components/LinkTree";
+import type { Theme } from "./components/ThemeSwitch";
 import { asset } from "./assets";
 
 const content: Record<Locale, LocaleContent> = {
@@ -14,7 +15,8 @@ const content: Record<Locale, LocaleContent> = {
 };
 
 const locales = Object.keys(content) as Locale[];
-const localeStorageKey = "tiam-tiam-eat-locale";
+const localeStorageKey = "tiam-tiam-eat-locale-choice";
+const themeStorageKey = "tiam-tiam-eat-theme";
 
 function isLocale(value: unknown): value is Locale {
   return typeof value === "string" && (locales as string[]).includes(value);
@@ -27,13 +29,38 @@ export function getInitialLocale(): Locale {
     const savedLocale = window.localStorage.getItem(localeStorageKey);
     if (isLocale(savedLocale)) return savedLocale;
   } catch {
-    // Local storage may be unavailable; browser language is a safe fallback.
+    // Local storage may be unavailable; English is the default.
   }
 
-  const language = navigator.language.toLowerCase();
-  if (language.startsWith("zh")) return "zh-Hant";
-  if (language.startsWith("nl")) return "nl";
   return "en";
+}
+
+function isTheme(value: unknown): value is Theme {
+  return value === "light" || value === "black";
+}
+
+// Only called from an effect, so it never runs during prerender.
+function readSavedTheme(): Theme {
+  try {
+    const savedTheme = window.localStorage.getItem(themeStorageKey);
+    if (isTheme(savedTheme)) return savedTheme;
+  } catch {
+    // Local storage may be unavailable; light is the default.
+  }
+
+  return "light";
+}
+
+// Keeps <html data-theme> and the two meta tags in step with the theme.
+// The inline script in index.html does the same before first paint.
+function applyTheme(theme: Theme) {
+  document.documentElement.dataset.theme = theme;
+  document
+    .querySelector('meta[name="color-scheme"]')
+    ?.setAttribute("content", theme === "black" ? "dark" : "light");
+  document
+    .querySelector('meta[name="theme-color"]')
+    ?.setAttribute("content", theme === "black" ? "#120d0b" : "#D47449");
 }
 
 type Props = {
@@ -42,20 +69,44 @@ type Props = {
 
 function App({ initialLocale }: Props) {
   const [locale, setLocale] = useState<Locale>(initialLocale);
+  // Starts on light so the first render matches the prerendered HTML.
+  const [theme, setTheme] = useState<Theme>("light");
   const currentContent = content[locale];
   const featured =
     currentContent.projects.find((project) => project.id === currentContent.featured) ??
     currentContent.projects[0];
 
-  useEffect(() => {
-    document.documentElement.lang = locale;
+  const changeLocale = (next: Locale) => {
+    setLocale(next);
 
     try {
-      window.localStorage.setItem(localeStorageKey, locale);
+      window.localStorage.setItem(localeStorageKey, next);
     } catch {
       // The language switch still works when local storage is unavailable.
     }
+  };
+
+  const changeTheme = (next: Theme) => {
+    setTheme(next);
+    applyTheme(next);
+
+    try {
+      window.localStorage.setItem(themeStorageKey, next);
+    } catch {
+      // The theme still switches when local storage is unavailable.
+    }
+  };
+
+  useEffect(() => {
+    document.documentElement.lang = locale;
   }, [locale]);
+
+  // Apply the saved choice after mount. The head script has already set it before first paint.
+  useEffect(() => {
+    const savedTheme = readSavedTheme();
+    setTheme(savedTheme);
+    applyTheme(savedTheme);
+  }, []);
 
   // The fruit drifts up a little slower than the page as you scroll (see .decor in style.css).
   useEffect(() => {
@@ -93,7 +144,13 @@ function App({ initialLocale }: Props) {
         />
       </div>
       <main className="stack">
-        <LinkTree content={currentContent} locale={locale} onLocaleChange={setLocale} />
+        <LinkTree
+          content={currentContent}
+          locale={locale}
+          onLocaleChange={changeLocale}
+          theme={theme}
+          onThemeChange={changeTheme}
+        />
         <InfoCard project={featured} ui={currentContent.ui} />
       </main>
       <footer className="site-footer">

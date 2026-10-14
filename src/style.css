@@ -10,6 +10,15 @@
   --ink-soft: rgba(43, 37, 34, 0.72);
   --card-bg: rgba(228, 224, 209, 0.9);
   --card-border: rgba(43, 37, 34, 0.14);
+  /* Theme tokens: light values here; the black theme overrides them in :root[data-theme="black"]. */
+  --page-base: var(--cream);
+  --page-gradient: linear-gradient(180deg, #d06e45 0%, #e28653 22%, #caab7d 48%, #c7c2a0 74%, #dcd9c8 100%);
+  --card-shadow: 0 24px 60px -40px rgba(43, 37, 34, 0.45);
+  --switch-border: rgba(43, 37, 34, 0.24);
+  --row-bg: rgba(255, 252, 244, 0.42);
+  --row-bg-hover: rgba(255, 252, 244, 0.72);
+  --on-ink: var(--cream);
+  --grain-opacity: 0.05;
   --gutter: 16px;
   /* Latin from Garamond, CJK falls through to the subsetted Noto Serif TC. */
   --font-serif: "EB Garamond", "Noto Serif TC", Georgia, "Noto Serif CJK TC", "PingFang TC", serif;
@@ -24,6 +33,25 @@
   -webkit-font-smoothing: antialiased;
 }
 
+/* Black theme: App.tsx sets data-theme="black" on <html> (the head script in index.html does it before first paint). */
+:root[data-theme="black"] {
+  --persimmon: #e8895a;
+  --ink: #f2e8d8;
+  --ink-soft: rgba(242, 232, 216, 0.72);
+  --on-ink: #120d0b;
+  --sage: rgba(242, 232, 216, 0.16);
+  --card-bg: rgba(30, 22, 18, 0.9);
+  --card-border: rgba(242, 232, 216, 0.14);
+  --page-base: #120d0b;
+  --page-gradient: linear-gradient(180deg, #b5532b 0%, #7a3920 22%, #3f2618 48%, #221713 74%, #120d0b 100%);
+  --card-shadow: 0 24px 60px -40px rgba(0, 0, 0, 0.7);
+  --switch-border: rgba(242, 232, 216, 0.28);
+  --row-bg: rgba(242, 232, 216, 0.05);
+  --row-bg-hover: rgba(242, 232, 216, 0.11);
+  --grain-opacity: 0.035;
+  color-scheme: dark;
+}
+
 :root:lang(zh-Hant) {
   line-height: 1.75;
 }
@@ -34,7 +62,7 @@
 
 html {
   min-width: 320px;
-  background: var(--cream);
+  background: var(--page-base);
   scroll-behavior: smooth;
 }
 
@@ -42,8 +70,7 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background: linear-gradient(180deg, #d06e45 0%, #e28653 22%, #caab7d 48%, #c7c2a0 74%, #dcd9c8 100%)
-    fixed;
+  background: var(--page-gradient) fixed;
 }
 
 /* Paper grain: faint SVG noise over the gradient. */
@@ -53,7 +80,7 @@ body::before {
   z-index: 0;
   inset: 0;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
-  opacity: 0.05;
+  opacity: var(--grain-opacity);
   pointer-events: none;
 }
 
@@ -135,7 +162,7 @@ img {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
   border-radius: 24px;
-  box-shadow: 0 24px 60px -40px rgba(43, 37, 34, 0.45);
+  box-shadow: var(--card-shadow);
 }
 
 .card-header,
@@ -156,7 +183,7 @@ img {
 }
 
 .card-footer {
-  justify-content: flex-start;
+  justify-content: space-between;
   margin-top: 28px;
   font-size: 0.85rem;
   letter-spacing: 0.04em;
@@ -168,7 +195,7 @@ img {
   display: inline-flex;
   gap: 2px;
   padding: 3px;
-  border: 1px solid rgba(43, 37, 34, 0.24);
+  border: 1px solid var(--switch-border);
   border-radius: 999px;
 }
 
@@ -187,13 +214,34 @@ img {
 
 .language-button.is-active {
   background: var(--ink);
-  color: var(--cream);
+  color: var(--on-ink);
 }
 
 .language-button:focus-visible,
+.theme-button:focus-visible,
 .tree-row:focus-visible {
   outline: 2px solid var(--ink);
   outline-offset: 2px;
+}
+
+/* Theme switch in the card footer: the same pill look as the language switch. */
+.theme-button {
+  flex-shrink: 0;
+  padding: 0.2rem 0.75rem;
+  border: 1px solid var(--switch-border);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease;
+}
+
+.theme-button.is-active {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--on-ink);
 }
 
 /* Identity */
@@ -230,14 +278,14 @@ img {
   padding: 12px 18px 12px 14px;
   border: 1px solid var(--card-border);
   border-radius: 16px;
-  background: rgba(255, 252, 244, 0.42);
+  background: var(--row-bg);
   color: var(--ink);
   text-decoration: none;
   transition: background-color 160ms ease, border-color 160ms ease, transform 160ms ease;
 }
 
 .tree-row:hover {
-  background: rgba(255, 252, 244, 0.72);
+  background: var(--row-bg-hover);
   border-color: var(--persimmon);
   transform: translateX(4px);
 }

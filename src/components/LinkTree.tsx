@@ -1,11 +1,14 @@
 import type { Locale, LocaleContent, Project } from "../content/types";
 import { LanguageSwitch } from "./LanguageSwitch";
+import { ThemeSwitch, type Theme } from "./ThemeSwitch";
 import { asset } from "../assets";
 
 type Props = {
   content: LocaleContent;
   locale: Locale;
   onLocaleChange: (locale: Locale) => void;
+  theme: Theme;
+  onThemeChange: (theme: Theme) => void;
 };
 
 type Row = {
@@ -38,7 +41,7 @@ function projectRow(project: Project, ui: LocaleContent["ui"]): Row {
   };
 }
 
-export function LinkTree({ content, locale, onLocaleChange }: Props) {
+export function LinkTree({ content, locale, onLocaleChange, theme, onThemeChange }: Props) {
   const { group, ui, projects, links } = content;
   const rows: Row[] = [
     ...projects.map((project) => projectRow(project, ui)),
@@ -88,6 +91,11 @@ export function LinkTree({ content, locale, onLocaleChange }: Props) {
 
       <footer className="card-footer">
         <span>{group.handle}</span>
+        <ThemeSwitch
+          isBlack={theme === "black"}
+          label={ui.blackMode}
+          onToggle={() => onThemeChange(theme === "black" ? "light" : "black")}
+        />
       </footer>
     </section>
   );

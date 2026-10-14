@@ -48,7 +48,7 @@ Warm paper, not dark tech: the gradient is the page, the brush wordmark and frui
 
 - Keep the existing SVG noise overlay at about 0.05 opacity so the CSS gradient reads as paper.
 - One slow motion only: the juice droplets drift a few pixels on scroll. Respect `prefers-reduced-motion`.
-- No dark mode. The identity is the light gradient; set `color-scheme: light`.
+- Two themes. Light is the default and sets `color-scheme: light`. A Black switch in the card footer sets `data-theme="black"` on `<html>`, which swaps in a warm dark gradient, dark cards and about 0.035 grain. The choice is saved as `tiam-tiam-eat-theme` in localStorage.
 
 ## Page structure
 

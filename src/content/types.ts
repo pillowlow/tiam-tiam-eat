@@ -53,6 +53,7 @@ export type LocaleContent = {
     openArtwork: string;
     details: string;
     language: string;
+    blackMode: string;
     venues: string;
     credits: string;
     links: string;

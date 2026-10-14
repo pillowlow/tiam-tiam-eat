@@ -2,8 +2,8 @@ import type { Locale } from "../content/types";
 
 export const localeLabels: Record<Locale, string> = {
   en: "EN",
-  "zh-Hant": "繁",
   nl: "NL",
+  "zh-Hant": "繁",
 };
 
 type Props = {

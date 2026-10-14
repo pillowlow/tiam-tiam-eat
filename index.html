@@ -5,6 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
     <meta name="theme-color" content="#D47449" />
+    <script>
+      // Apply the saved theme before first paint, so black visitors never see a light flash.
+      // The storage key and colors must match applyTheme in src/App.tsx.
+      (function () {
+        var theme = "light";
+        try {
+          if (window.localStorage.getItem("tiam-tiam-eat-theme") === "black") theme = "black";
+        } catch (error) {
+          // Storage can be blocked; the page stays light.
+        }
+        document.documentElement.setAttribute("data-theme", theme);
+        var scheme = document.querySelector('meta[name="color-scheme"]');
+        var themeColor = document.querySelector('meta[name="theme-color"]');
+        if (scheme) scheme.setAttribute("content", theme === "black" ? "dark" : "light");
+        if (themeColor) themeColor.setAttribute("content", theme === "black" ? "#120d0b" : "#D47449");
+      })();
+    </script>
     <meta
       name="description"
       content="tiam-tiam eat — an artist group. Current project: 釘點芳 Ripe for the pickin', 25 October 2026 in Eindhoven and Taipei."
